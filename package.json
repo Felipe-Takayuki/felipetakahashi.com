@@ -1,0 +1,20 @@
+{
+  "name": "felipetakahashi.com",
+  "version": "1.0.0",
+  "description": "Takahashi Logs - Blog pessoal minimalista em Markdown",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": ["blog", "minimalist", "markdown", "astro"],
+  "author": "Felipe Takahashi",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.0"
+  }
+}

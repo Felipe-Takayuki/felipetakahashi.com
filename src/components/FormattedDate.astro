@@ -1,0 +1,26 @@
+---
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+
+// Format as YYYY-MM-DD or readable PT-BR
+const isoString = date.toISOString();
+const formattedDate = date.toLocaleDateString('pt-BR', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+---
+
+<time datetime={isoString} class="font-mono text-muted">
+  {formattedDate}
+</time>
+
+<style>
+  time {
+    font-size: 0.85rem;
+    letter-spacing: -0.01em;
+  }
+</style>

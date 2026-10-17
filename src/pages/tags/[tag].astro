@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  const uniqueTags = Array.from(
+    new Set(allPosts.flatMap((post) => post.data.tags || []).map((t) => t.toLowerCase()))
+  );
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts
+      .filter((post) =>
+        (post.data.tags || []).map((t) => t.toLowerCase()).includes(tag)
+      )
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, tag },
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout
+  title={`#${tag}`}
+  description={`Artigos com a tag #${tag} no Takahashi Logs.`}
+>
+  <div class="container tag-page">
+    <div class="back-nav">
+      <a href="/" class="back-link">&larr; Voltar para todos os artigos</a>
+    </div>
+
+    <header class="tag-header">
+      <span class="tag-subtitle font-mono">Tópico</span>
+      <h1 class="tag-title">#{tag}</h1>
+      <p class="tag-count text-muted font-mono">
+        {posts.length} {posts.length === 1 ? 'matéria encontrada' : 'matérias encontradas'}
+      </p>
+    </header>
+
+    <div class="posts-list">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page {
+    max-width: var(--content-width);
+  }
+
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-family: var(--font-mono);
+  }
+
+  .back-link:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  .tag-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tag-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0.25rem 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tag-count {
+    font-size: 0.85rem;
+  }
+</style>

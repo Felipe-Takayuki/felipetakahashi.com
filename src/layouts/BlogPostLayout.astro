@@ -1,0 +1,206 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  tags?: string[];
+  rawContent?: string;
+}
+
+const { title, description, pubDate, updatedDate, heroImage, tags = [], rawContent = '' } = Astro.props;
+const readingTime = rawContent ? getReadingTime(rawContent) : null;
+---
+
+<BaseLayout title={title} description={description} image={heroImage}>
+  <article class="container blog-post">
+    <div class="back-nav">
+      <a href="/" class="back-link">&larr; Voltar para todas as matérias</a>
+    </div>
+
+    <header class="post-header">
+      <div class="post-meta">
+        <FormattedDate date={pubDate} />
+        {readingTime && (
+          <>
+            <span class="meta-dot">&middot;</span>
+            <span class="reading-time">{readingTime}</span>
+          </>
+        )}
+        {updatedDate && (
+          <>
+            <span class="meta-dot">&middot;</span>
+            <span class="updated-date">Atualizado em <FormattedDate date={updatedDate} /></span>
+          </>
+        )}
+      </div>
+
+      <h1 class="post-title">{title}</h1>
+      <p class="post-subtitle">{description}</p>
+
+      {tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map((tag) => (
+            <a href={`/tags/${encodeURIComponent(tag.toLowerCase())}`} class="tag">
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {heroImage && (
+        <div class="hero-image-wrapper">
+          <img src={heroImage} alt={title} class="hero-image" />
+        </div>
+      )}
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <footer class="post-end">
+      <div class="end-divider"></div>
+      <div class="end-actions">
+        <a href="/" class="back-link">&larr; Voltar ao índice</a>
+        <a href="#top" class="top-link">Ir ao topo &uarr;</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    max-width: var(--content-width);
+  }
+
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-family: var(--font-mono);
+  }
+
+  .back-link:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  .post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .meta-dot {
+    opacity: 0.5;
+  }
+
+  .post-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+
+  .tag:hover {
+    color: var(--text);
+    border-color: var(--text);
+    background-color: var(--bg-card);
+  }
+
+  .hero-image-wrapper {
+    margin-top: 1.75rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .post-end {
+    margin-top: 3.5rem;
+  }
+
+  .end-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .end-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-link {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-family: var(--font-mono);
+  }
+
+  .top-link:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.75rem;
+    }
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <linearGradient id="warmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="400" fill="#18181b"/>
+  
+  <!-- Subtle grid -->
+  <g stroke="#27272a" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Glowing geometric compositions -->
+  <circle cx="200" cy="200" r="100" fill="url(#skyGrad)" opacity="0.9" filter="url(#shadow)"/>
+  <rect x="360" y="110" width="180" height="180" rx="24" fill="url(#warmGrad)" opacity="0.9" transform="rotate(15 450 200)" filter="url(#shadow)"/>
+  
+  <!-- Modern accent badge -->
+  <rect x="520" y="160" width="160" height="80" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="600" y="208" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="18" text-anchor="middle">Full Color Accent</text>
+  
+  <text x="400" y="360" fill="#a1a1aa" font-family="ui-monospace, monospace" font-size="14" text-anchor="middle">Exemplo: Imagens mantêm 100% de suas cores naturais no Takahashi Logs</text>
+</svg>

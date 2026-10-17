@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página não encontrada"
+  description="Erro 404 - A página que você procura não foi encontrada no Takahashi Logs."
+>
+  <div class="container not-found-page">
+    <span class="error-code font-mono">404</span>
+    <h1 class="error-title">Página não encontrada</h1>
+    <p class="error-desc text-muted">
+      O endereço que você tentou acessar não existe ou foi movido.
+    </p>
+    <a href="/" class="back-home-btn">&larr; Retornar para a página inicial</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found-page {
+    max-width: var(--content-width);
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .error-code {
+    display: inline-block;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .error-title {
+    font-size: 2.25rem;
+    font-weight: 750;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .error-desc {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+
+  .back-home-btn {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .back-home-btn:hover {
+    background-color: var(--text);
+    color: var(--bg);
+  }
+</style>

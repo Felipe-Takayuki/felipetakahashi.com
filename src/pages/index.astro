@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort by pubDate descending
+const posts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Collect all unique tags
+const allTags = Array.from(
+  new Set(posts.flatMap((post) => post.data.tags || []))
+).sort();
+---
+
+<BaseLayout
+  title="Takahashi Logs"
+  description="Blog pessoal de Felipe Takahashi. Notas, ideias e registros sobre desenvolvimento de software, tecnologia e minimalismo."
+>
+  <div class="container index-page">
+    <section class="intro-section">
+      <h1 class="intro-title">Takahashi Logs</h1>
+      <p class="intro-description">
+        Espaço para documentar ideias, registros técnicos, aprendizados e reflexões sobre engenharia de software e design. Matérias escritas em Markdown com foco em clareza e simplicidade.
+      </p>
+    </section>
+
+    {allTags.length > 0 && (
+      <section class="tags-filter">
+        <span class="tags-label font-mono">Tópicos:</span>
+        <div class="tags-list">
+          {allTags.map((tag) => (
+            <a href={`/tags/${encodeURIComponent(tag.toLowerCase())}`} class="tag-pill">
+              #{tag}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="posts-section">
+      <div class="posts-header">
+        <h2 class="section-heading font-mono">Últimas Publicações ({posts.length})</h2>
+      </div>
+
+      {posts.length > 0 ? (
+        <div class="posts-list">
+          {posts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">Nenhuma matéria encontrada. Adicione arquivos <code>.md</code> em <code>src/content/blog/</code>.</p>
+      )}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .index-page {
+    max-width: var(--content-width);
+  }
+
+  .intro-section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .intro-title {
+    font-size: 2rem;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+  }
+
+  .intro-description {
+    font-size: 1.075rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .tags-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .tags-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-right: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag-pill {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+
+  .tag-pill:hover {
+    color: var(--text);
+    border-color: var(--text);
+    background-color: var(--bg-card);
+  }
+
+  .posts-section {
+    margin-top: 1rem;
+  }
+
+  .section-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+  }
+
+  .empty-state {
+    color: var(--text-muted);
+    padding: 3rem 0;
+    text-align: center;
+  }
+</style>

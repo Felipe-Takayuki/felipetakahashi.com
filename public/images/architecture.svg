@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="astroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5d01" />
+      <stop offset="100%" stop-color="#d946ef" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="360" fill="#0f172a" rx="8"/>
+
+  <!-- Pipeline boxes -->
+  <!-- Step 1: Markdown -->
+  <g transform="translate(60, 110)">
+    <rect width="180" height="130" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="90" y="45" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="700" font-size="16" text-anchor="middle">Markdown (.md)</text>
+    <text x="90" y="80" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="middle">src/content/blog/</text>
+    <text x="90" y="105" fill="#e2e8f0" font-family="monospace" font-size="11" text-anchor="middle">Texto + Frontmatter</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M 255 175 L 305 175" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <polygon points="305,170 315,175 305,180" fill="#64748b"/>
+
+  <!-- Step 2: Astro Compiler -->
+  <g transform="translate(320, 95)">
+    <rect width="180" height="160" rx="8" fill="#1e293b" stroke="url(#astroGrad)" stroke-width="2.5"/>
+    <text x="90" y="40" fill="#f43f5e" font-family="system-ui, sans-serif" font-weight="700" font-size="18" text-anchor="middle">Astro Engine</text>
+    <text x="90" y="75" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">Validação de Schema</text>
+    <text x="90" y="100" fill="#a78bfa" font-family="monospace" font-size="12" text-anchor="middle">Shiki Highlighting</text>
+    <text x="90" y="125" fill="#34d399" font-family="monospace" font-size="12" text-anchor="middle">Static HTML/CSS</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M 515 175 L 565 175" stroke="#64748b" stroke-width="2"/>
+  <polygon points="565,170 575,175 565,180" fill="#64748b"/>
+
+  <!-- Step 3: Takahashi Logs -->
+  <g transform="translate(580, 110)">
+    <rect width="160" height="130" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="80" y="45" fill="#10b981" font-family="system-ui, sans-serif" font-weight="700" font-size="16" text-anchor="middle">Takahashi Logs</text>
+    <text x="80" y="80" fill="#e2e8f0" font-family="monospace" font-size="12" text-anchor="middle">Zero JS Desnecessário</text>
+    <text x="80" y="105" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">B&amp;W Minimalista</text>
+  </g>
+
+  <text x="400" y="325" fill="#64748b" font-family="monospace" font-size="13" text-anchor="middle">Fluxo de compilação: do arquivo .md ao HTML estático ultrarrápido</text>
+</svg>

@@ -1,0 +1,97 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-container">
+    <div class="brand">
+      <a href="/" class="brand-link">
+        <span class="brand-name">Takahashi Logs</span>
+        <span class="brand-sub">/ blog</span>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <a href="/" class:list={['nav-link', { active: currentPath === '/' }]}>
+        Artigos
+      </a>
+      <a href="/about" class:list={['nav-link', { active: currentPath.startsWith('/about') }]}>
+        Sobre
+      </a>
+      <a href="/rss.xml" class="nav-link" title="Feed RSS">
+        RSS
+      </a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .brand-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    color: var(--text);
+  }
+
+  .brand-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.925rem;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 520px) {
+    .site-header {
+      padding: 1.2rem 0;
+      margin-bottom: 1.75rem;
+    }
+    .brand-sub {
+      display: none;
+    }
+    .nav {
+      gap: 0.9rem;
+    }
+  }
+</style>

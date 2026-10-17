@@ -1,0 +1,251 @@
+:root {
+  --bg: #ffffff;
+  --bg-card: #f8f8f8;
+  --bg-code: #f3f3f3;
+  --text: #111111;
+  --text-muted: #666666;
+  --text-dim: #999999;
+  --border: #e6e6e6;
+  --border-strong: #111111;
+  --accent: #000000;
+  --focus-ring: #000000;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Monaco, Consolas, monospace;
+  --content-width: 720px;
+}
+
+html[data-theme="dark"] {
+  --bg: #090909;
+  --bg-card: #141414;
+  --bg-code: #181818;
+  --text: #f0f0f0;
+  --text-muted: #9e9e9e;
+  --text-dim: #5c5c5c;
+  --border: #242424;
+  --border-strong: #f0f0f0;
+  --accent: #ffffff;
+  --focus-ring: #ffffff;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Typography & Markdown Prose */
+.prose {
+  color: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.prose > * + * {
+  margin-top: 1.35rem;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--text);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.prose h1 {
+  font-size: 1.85rem;
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.prose h2 {
+  font-size: 1.4rem;
+  margin-top: 2.2rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+  font-size: 1.15rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.prose p {
+  margin-bottom: 1.1rem;
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--border-strong);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+/* Code */
+.prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--bg-code);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  padding: 1.1rem 1.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  background-color: var(--bg-code) !important;
+}
+
+/* Switch Shiki light/dark themes */
+html[data-theme="dark"] .astro-code,
+html[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+html:not([data-theme="dark"]) .astro-code,
+html:not([data-theme="dark"]) .astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+/* Images - Keep colors as requested! */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.75rem auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.prose figure {
+  margin: 1.75rem 0;
+  text-align: center;
+}
+
+.prose figcaption {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.prose th, .prose td {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.prose th {
+  background-color: var(--bg-card);
+  font-weight: 600;
+}
+
+/* Utility classes */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-dim {
+  color: var(--text-dim);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

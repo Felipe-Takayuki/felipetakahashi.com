@@ -1,0 +1,53 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-left">
+      <span>&copy; {currentYear} Takahashi Logs</span>
+      <span class="separator">&middot;</span>
+      <span>Felipe Takahashi</span>
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <span class="separator">&middot;</span>
+      <a href="/rss.xml">RSS</a>
+      <span class="separator">&middot;</span>
+      <a href="#top" id="back-to-top">Topo &uarr;</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    padding: 2.5rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .separator {
+    margin: 0 0.4rem;
+    opacity: 0.5;
+  }
+
+  .footer-right a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .footer-right a:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+</style>

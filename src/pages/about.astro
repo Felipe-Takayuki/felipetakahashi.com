@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sobre"
+  description="Sobre o Takahashi Logs e Felipe Takahashi."
+>
+  <div class="container about-page">
+    <header class="about-header">
+      <h1 class="page-title">Sobre</h1>
+      <p class="page-subtitle text-muted">Um espaço dedicado a ideias sem ruído.</p>
+    </header>
+
+    <div class="prose">
+      <p>
+        Olá! Eu sou o <strong>Felipe Takahashi</strong>. Bem-vindo ao <strong>Takahashi Logs</strong>, meu espaço pessoal na web para registrar aprendizados, artigos técnicos, notas sobre engenharia de software e processos criativos.
+      </p>
+
+      <h2>A Filosofia do Blog</h2>
+      <p>
+        A internet moderna tornou-se excessivamente barulhenta: pop-ups, rastreadores, banners animados, estilos carregados e distrações infinitas.
+      </p>
+      <p>
+        Este blog foi construído sob uma premissa oposta:
+      </p>
+      <ul>
+        <li><strong>Minimalismo estrito em preto e branco:</strong> foco total na tipografia, hierarquia e legibilidade do texto.</li>
+        <li><strong>Imagens em destaque:</strong> as únicas cores da página vêm das ilustrações, fotos e diagramas adicionados aos artigos.</li>
+        <li><strong>Conteúdo em Markdown simples:</strong> cada artigo é um arquivo <code>.md</code> versionado no Git. Sem CMS complexo ou bancos de dados lentos.</li>
+        <li><strong>Leveza e velocidade:</strong> páginas estáticas ultrarrápidas, sem JavaScript desnecessário.</li>
+      </ul>
+
+      <h2>Como este blog é feito</h2>
+      <p>
+        O <em>Takahashi Logs</em> é construído com:
+      </p>
+      <ul>
+        <li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> para geração estática e Content Collections.</li>
+        <li>Markdown simples para redação de artigos.</li>
+        <li>CSS puro com variáveis de tema para suporte instantâneo aos modos claro e escuro.</li>
+        <li>Feed RSS integrado para quem prefere acompanhar via leitor de notícias.</li>
+      </ul>
+
+      <h2>Contato & Redes</h2>
+      <p>
+        Você pode me encontrar nos seguintes canais:
+      </p>
+      <ul>
+        <li>GitHub: <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com</a></li>
+        <li>Feed RSS: <a href="/rss.xml">/rss.xml</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: var(--content-width);
+  }
+
+  .about-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-size: 2.25rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.05rem;
+  }
+</style>
