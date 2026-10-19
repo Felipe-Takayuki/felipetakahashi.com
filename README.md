@@ -16,7 +16,38 @@ Blog pessoal minimalista em preto e branco com foco em conteúdo escrito em **Ma
 
 ---
 
-## 🚀 Como Executar
+## 🌿 Estrutura de Branches (Fluxo de Publicação)
+
+O repositório é organizado com um fluxo simples e seguro para separação de rascunhos e produção:
+
+- **`main`**: Branch principal e de produção. Contém apenas os artigos finalizados e publicados. Seu serviço de hospedagem (Vercel, Cloudflare, etc.) deve apontar para esta branch.
+- **`drafts`**: Branch de produção de conteúdo. É onde novos artigos são iniciados, rascunhados e desenvolvidos sem risco de irem ao ar prematuramente.
+
+### Como trabalhar no dia a dia:
+
+1. **Escrever uma nova matéria**:
+   ```bash
+   git checkout drafts
+   ```
+   Crie ou edite seu arquivo `.md` em `src/content/blog/`, visualize localmente com `npm run dev` e comite:
+   ```bash
+   git add src/content/blog/meu-novo-artigo.md
+   git commit -m "feat(content): rascunho do artigo sobre X"
+   git push origin drafts
+   ```
+
+2. **Publicar a matéria finalizada**:
+   Quando o artigo estiver concluído e pronto para ir ao ar no blog:
+   ```bash
+   git checkout main
+   git merge drafts
+   git push origin main
+   ```
+   *(Ou abra um Pull Request de `drafts` para `main` diretamente no GitHub).*
+
+---
+
+## 🚀 Como Executar Localmente
 
 ### 1. Iniciar servidor de desenvolvimento local
 ```bash
@@ -47,7 +78,7 @@ No topo do arquivo, adicione o cabeçalho (*frontmatter*):
 ---
 title: "Título da Sua Matéria"
 description: "Uma breve descrição resumindo o artigo."
-pubDate: 2026-10-17
+pubDate: 2026-10-19
 heroImage: "/images/minha-imagem.png" # opcional
 tags: ["tecnologia", "desenvolvimento"]
 draft: false # mude para true se ainda estiver rascunhando
@@ -97,8 +128,7 @@ As imagens manterão suas cores originais, destacando-se de forma limpa sobre o 
 │   ├── content/
 │   │   └── blog/               # 📝 SEUS ARTIGOS .MD FICAM AQUI
 │   │       ├── bem-vindo-ao-takahashi-logs.md
-│   │       ├── como-funciona-o-pipeline-deste-blog.md
-│   │       └── o-poder-do-design-minimalista.md
+│   │       └── arquitetura-limpa-tipos-programação.md (em drafts)
 │   ├── layouts/
 │   │   ├── BaseLayout.astro    # Shell principal com meta tags
 │   │   └── BlogPostLayout.astro# Layout de leitura das matérias
@@ -110,10 +140,7 @@ As imagens manterão suas cores originais, destacando-se de forma limpa sobre o 
 │   │   ├── posts/[...slug].astro # Rota dinâmica dos posts
 │   │   └── tags/[tag].astro    # Rota dinâmica dos tópicos
 │   ├── styles/
-│   │   └── global.css          # Estilos monocromáticos e tipografia
-│   ├── utils/
-│   │   └── readingTime.ts      # Cálculo automático de tempo de leitura
-│   └── content.config.ts       # Validação e schema de dados
+│   └── utils/
 ├── astro.config.mjs
 ├── package.json
 └── tsconfig.json
